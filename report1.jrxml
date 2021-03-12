@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report1" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="257d16af-af1d-4490-8e49-e9307d320ef3">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[select
+empleado_operador.emploperad_id,
+empleado.empleado_id,
+empleado.empleado_nombre,
+empleado.empleado_apellido,
+empleado.empleado_pais,
+empleado_operador.emploperad_tiempomanejo
+from empleado_operador
+INNER JOIN public.empleado on empleado.empleado_id = empleado_operador.empleado_id]]>
+	</queryString>
+	<field name="emploperad_id" class="java.lang.Integer"/>
+	<field name="empleado_id" class="java.lang.Integer"/>
+	<field name="empleado_nombre" class="java.lang.String"/>
+	<field name="empleado_apellido" class="java.lang.String"/>
+	<field name="empleado_pais" class="java.lang.String"/>
+	<field name="emploperad_tiempomanejo" class="java.lang.Integer"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="153" y="18" width="291" height="31" uuid="71b46e1f-fdec-45c8-a666-befbd8e2e53d"/>
+				<textElement textAlignment="Justified">
+					<font size="24"/>
+				</textElement>
+				<text><![CDATA[SISTEMA DE DRONES]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch">
+			<staticText>
+				<reportElement x="84" y="0" width="375" height="35" uuid="35e34495-c0d5-444b-aa07-6e81ad3143b2"/>
+				<text><![CDATA[Mostrar el nombre y apellido de un empleado operador de dron y mostrar las horas en las que ha manejado]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="29" splitType="Stretch">
+			<staticText>
+				<reportElement x="153" y="2" width="100" height="20" uuid="960efe10-bf4a-40ed-919e-c26e2d24f980"/>
+				<text><![CDATA[Nombre y Apellido]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="295" y="2" width="100" height="20" uuid="cf2909ad-630e-41f2-9e68-ffef7f3a76cd"/>
+				<text><![CDATA[Horas de Manejo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="105" y="2" width="21" height="20" uuid="480f9e42-c205-43ab-a64a-2f9daaa14578"/>
+				<text><![CDATA[Id]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="411" y="2" width="100" height="20" uuid="59a8ecd0-9d25-4a97-a31f-6afbc3f6e4f7"/>
+				<text><![CDATA[Pais]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="36" splitType="Stretch">
+			<textField>
+				<reportElement x="153" y="10" width="42" height="20" uuid="959f22a0-ba17-4269-bb69-429590b08529"/>
+				<textFieldExpression><![CDATA[$F{empleado_nombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="295" y="10" width="100" height="20" uuid="3c7bda32-ac91-4093-8652-a4b0fd49b3ab"/>
+				<textFieldExpression><![CDATA[$F{emploperad_tiempomanejo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="195" y="10" width="58" height="20" uuid="75b239d6-46e6-4e4a-a22a-b0e472bfab8d"/>
+				<textFieldExpression><![CDATA[$F{empleado_apellido}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="105" y="10" width="34" height="20" uuid="77436e30-4544-49b8-b7a2-7a4705a88240"/>
+				<textFieldExpression><![CDATA[$F{emploperad_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="411" y="10" width="100" height="20" uuid="de461033-9241-4b24-b611-b3057d596de2"/>
+				<textFieldExpression><![CDATA[$F{empleado_pais}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="219" splitType="Stretch">
+			<barChart>
+				<chart>
+					<reportElement x="14" y="0" width="555" height="219" uuid="de6b1aef-3fad-4e0d-abbb-e43b54094799"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<categoryDataset>
+					<categorySeries>
+						<seriesExpression><![CDATA[$F{empleado_nombre}]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{empleado_nombre}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{emploperad_tiempomanejo}]]></valueExpression>
+					</categorySeries>
+				</categoryDataset>
+				<barPlot isShowLabels="true">
+					<plot orientation="Horizontal"/>
+					<itemLabel/>
+					<categoryAxisFormat>
+						<axisFormat/>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat/>
+					</valueAxisFormat>
+				</barPlot>
+			</barChart>
+		</band>
+	</pageFooter>
+</jasperReport>
